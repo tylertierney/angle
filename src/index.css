@@ -1,0 +1,284 @@
+* {
+  box-sizing: border-box;
+  font-family: sans-serif;
+  --text-color: rgba(0, 0, 0, 0.7);
+  --gray: rgb(221, 221, 221);
+  --green: rgba(99, 219, 99, 0.75);
+  --dark-bg: rgb(18, 18, 18);
+}
+
+body {
+  overflow-y: scroll;
+}
+
+body.darkMode {
+  background-color: var(--dark-bg);
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+nav {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--text-color);
+  /* margin-top: 1rem; */
+}
+
+nav h1 {
+  margin: 0;
+  font-family: monospace;
+  font-size: 4rem;
+}
+
+.darkMode nav {
+  color: white;
+}
+
+nav button {
+  border-radius: 0.4rem;
+  padding: 0.4rem;
+  background: transparent;
+  border: 2px solid var(--gray);
+  color: inherit;
+  cursor: pointer;
+}
+
+.darkMode nav button {
+  border-color: white;
+  opacity: 0.8;
+}
+
+svg {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+svg {
+  width: 200px;
+  height: 200px;
+}
+
+svg path.arc {
+  stroke: rgb(98, 203, 238);
+  fill: transparent;
+  stroke-width: 2;
+}
+
+svg line {
+  fill: rgb(216, 216, 216);
+  stroke-width: 1px;
+  stroke-linecap: round;
+  stroke: rgb(223, 98, 71);
+}
+
+svg circle {
+  stroke: white;
+  fill: black;
+}
+
+.darkMode circle {
+  stroke: var(--dark-bg);
+  fill: white;
+}
+
+.guess-input {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  border-radius: 0.4rem;
+}
+
+.guess-input input {
+  border-radius: inherit;
+  border: 1px solid gray;
+  width: 100%;
+  min-width: 2.5rem;
+  background: transparent;
+}
+
+.guess-input input:disabled {
+  background: var(--gray);
+  opacity: 0.7;
+}
+
+.darkMode .guess-input input {
+  color: white;
+}
+
+.guess-input button {
+  border: none;
+  border-radius: inherit;
+  padding: 0.6rem;
+  background: var(--gray);
+  cursor: pointer;
+  color: var(--text-color);
+}
+
+.guess-input button:hover {
+  background-color: var(--green);
+}
+
+.guess-input button:active {
+  background-color: color-mix(in srgb, var(--green) 93%, black);
+  translate: 1px 1px;
+}
+
+.attempts {
+  text-align: center;
+  color: var(--text-color);
+}
+
+.darkMode .attempts {
+  color: white;
+}
+
+.guesses {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.guess {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(2rem, 2.5rem));
+  grid-template-rows: 1fr;
+  grid-column-gap: 4px;
+}
+
+.guess span {
+  display: flex;
+  position: relative;
+  background-color: rgb(221, 221, 221);
+  border-radius: 3px;
+  align-items: center;
+  justify-content: center;
+  padding: 0.3rem 0;
+  color: var(--text-color);
+}
+
+.degree {
+  grid-column: 1 / span 2;
+}
+
+.direction {
+  grid-column: 3 / span 1;
+}
+
+.proximity {
+  grid-column: 4 / span 3;
+}
+
+.guess.correct span {
+  background-color: var(--green);
+  color: white;
+}
+
+div.alert {
+  position: fixed;
+  background-color: white;
+  box-shadow: 0px 0px 10px 1px gray;
+  top: 2rem;
+  width: 90vw;
+  padding: 1rem;
+  max-width: 20rem;
+  left: 50%;
+  translate: -50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+  border-radius: 0.4rem;
+}
+
+.darkMode div.alert {
+  background: var(--dark-bg);
+  color: white;
+}
+
+.close-button {
+  border-radius: 100%;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: inherit;
+  font-size: 1.4rem;
+  color: var(--text-color);
+  padding: 0.2rem;
+  display: flex;
+}
+
+.darkMode .close-button {
+  color: white;
+}
+
+.close-button:hover {
+  background: rgba(128, 128, 128, 0.097);
+}
+
+.darkMode .close-button:hover {
+  background-color: rgba(255, 255, 255, 0.269);
+}
+
+div.alert .close-button {
+  position: absolute;
+  top: 0.2rem;
+  right: 0.2rem;
+}
+
+div.alert button.restart {
+  border: none;
+  padding: 0.8rem;
+  cursor: pointer;
+  background: var(--green);
+  border-radius: 0.4rem;
+  box-shadow: 0px 0px 10px 1px rgb(128, 128, 128, 0.4);
+}
+
+dialog {
+  border-radius: 0.4rem;
+  box-shadow: 0px 0px 10px 1px gray;
+  border: 1px solid gray;
+  padding: 0.5rem;
+  max-height: 94vh;
+  overflow-y: scroll;
+  color: var(--text-color);
+}
+
+.darkMode dialog {
+  background-color: var(--dark-bg);
+  color: white;
+}
+
+.dialog-content {
+  max-width: 360px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  padding: 0 0.5rem;
+}
+
+.dialog-content p, .dialog-content h2 {
+  margin: 0;
+  margin-bottom: 0.5rem;
+  /* color: var(--text-color); */
+}
+
+dialog button {
+  align-self: flex-end;
+}
+
+dialog .example {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-self: center;
+}
