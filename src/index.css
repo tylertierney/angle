@@ -100,6 +100,7 @@ svg circle {
   width: 100%;
   min-width: 2.5rem;
   background: transparent;
+  font-size: 1.2rem;
 }
 
 .guess-input input:disabled {

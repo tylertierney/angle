@@ -113,8 +113,9 @@ export default function App() {
         }}
       >
         <input
-          // autoFocus
+          autoFocus
           id="currentGuess"
+          inputMode="numeric"
           type="number"
           value={currentGuess}
           onChange={(e) => setCurrentGuess(e.target.value)}
