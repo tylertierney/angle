@@ -1,27 +1,13 @@
-# React + TypeScript + Vite
+# Angle
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This site is a complete ripoff of [Angle.wtf](https://angle.wtf) - a game where you have a limited number of chances to guess the angle shown.
 
-Currently, two official plugins are available:
+The official site has a new angle every day and only allows you to play once a day, storing your game data so you can view trends over time.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+I wanted to keep playing, so I made a clone of the site using React. My version allows for 5 attempts at guessing the angle and provides an option to refresh the game with a new angle.
 
-## Expanding the ESLint configuration
+I used this as an opportunity to learn more about dynamically writing SVG paths. The angle SVG is generated using two straight lines, a small circle at the "origin", and a medium-sized arc that connects the two lines (representing the angle). At render-time (and whenever a new game begins), there's a random rotation applied to the SVG group in order to make it a little more difficult.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+The main tools I used for this project are Vite and React, with Github Pages as a deployment pipeline.
 
-- Configure the top-level `parserOptions` property like this:
-
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
-```
-
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+The live game can be found at: [https://tylertierney.github.io/angle/](https://tylertierney.github.io/angle/)
