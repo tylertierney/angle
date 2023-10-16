@@ -3,12 +3,7 @@ import { FC } from "react";
 const RADIUS = 48;
 const ARC_RADIUS = 12;
 
-const describeArc = (
-  radians: number,
-  radius: number,
-  startAngle: number,
-  endAngle: number
-) => {
+const describeArc = (radians: number, radius: number, endAngle: number) => {
   const start = {
     x: radius * Math.cos(radians),
     y: radius * Math.sin(radians),
@@ -18,7 +13,7 @@ const describeArc = (
     y: 0,
   };
 
-  const largeArcFlag = endAngle - startAngle <= 180 ? "0" : "1";
+  const largeArcFlag = endAngle <= 180 ? "0" : "1";
 
   const d = [
     "M",
@@ -67,7 +62,7 @@ const Angle: FC<AngleProps> = ({ angle, rotation }) => {
       xmlns="http://www.w3.org/2000/svg"
     >
       <g style={{ rotate: rotation + "deg" }}>
-        <path className="arc" d={describeArc(radians, ARC_RADIUS, 0, angle)} />
+        <path className="arc" d={describeArc(radians, ARC_RADIUS, angle)} />
         <line x1={line1.x1} y1={line1.y1} x2={line1.x2} y2={line1.y2} />
         <line x1={line2.x1} y1={line2.y1} x2={line2.x2} y2={line2.y2} />
         <circle cx="0" cy="0" r="2" />
