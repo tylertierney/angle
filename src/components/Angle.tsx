@@ -5,8 +5,6 @@ const ARC_RADIUS = 12;
 
 const describeArc = (
   radians: number,
-  x: number,
-  y: number,
   radius: number,
   startAngle: number,
   endAngle: number
@@ -69,10 +67,7 @@ const Angle: FC<AngleProps> = ({ angle, rotation }) => {
       xmlns="http://www.w3.org/2000/svg"
     >
       <g style={{ rotate: rotation + "deg" }}>
-        <path
-          className="arc"
-          d={describeArc(radians, 0, 0, ARC_RADIUS, 0, angle)}
-        />
+        <path className="arc" d={describeArc(radians, ARC_RADIUS, 0, angle)} />
         <line x1={line1.x1} y1={line1.y1} x2={line1.x2} y2={line1.y2} />
         <line x1={line2.x1} y1={line2.y1} x2={line2.x2} y2={line2.y2} />
         <circle cx="0" cy="0" r="2" />
