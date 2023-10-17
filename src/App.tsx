@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import "./index.css";
 import Angle from "./components/Angle";
 import Guesses from "./components/Guesses";
+import useTheme from "./hooks/useTheme";
 
 const GAME_LENGTH = 5;
 
@@ -16,12 +17,10 @@ export default function App() {
   const [angle, setAngle] = useState(randomAngle());
   const [gameOver, setGameOver] = useState(false);
   const [showGameOverAlert, setShowGameOverAlert] = useState(false);
-  const [darkMode, setDarkMode] = useState<boolean>(
-    JSON.parse(localStorage.getItem("darkMode") ?? "false")
-  );
   const restartButton = useRef<HTMLButtonElement>(null);
   const guessInput = useRef<HTMLInputElement>(null);
   const helpMenu = useRef<HTMLDialogElement>(null);
+  const { darkMode, setDarkMode } = useTheme();
 
   const addGuess = (guess: string) => {
     if (!guess) return;
@@ -66,23 +65,6 @@ export default function App() {
     );
   }, [angle]);
 
-  useEffect(() => {
-    if (darkMode) {
-      document.body.classList.add("darkMode");
-    } else {
-      document.body.classList.remove("darkMode");
-    }
-  }, [darkMode]);
-
-  const toggleDarkMode = (darkMode: boolean) => {
-    if (darkMode) {
-      localStorage.setItem("darkMode", "false");
-    } else {
-      localStorage.setItem("darkMode", "true");
-    }
-    setDarkMode((prev) => !prev);
-  };
-
   return (
     <>
       <nav>
@@ -93,7 +75,7 @@ export default function App() {
               ❓
             </span>
           </button>
-          <button onClick={() => toggleDarkMode(darkMode)}>
+          <button onClick={() => setDarkMode((prev) => !prev)}>
             {darkMode ? "Light" : "Dark"} Theme&nbsp;
             {darkMode ? "☀️" : "🌙"}
           </button>
