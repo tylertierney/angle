@@ -27,7 +27,6 @@ nav {
   align-items: center;
   gap: 0.5rem;
   color: var(--text-color);
-  /* margin-top: 1rem; */
 }
 
 nav h1 {
@@ -52,39 +51,6 @@ nav button {
 .darkMode nav button {
   border-color: white;
   opacity: 0.8;
-}
-
-svg {
-  margin-top: 1rem;
-  margin-bottom: 1rem;
-}
-
-svg {
-  width: 200px;
-  height: 200px;
-}
-
-svg path.arc {
-  stroke: rgb(98, 203, 238);
-  fill: transparent;
-  stroke-width: 2;
-}
-
-svg line {
-  fill: rgb(216, 216, 216);
-  stroke-width: 1px;
-  stroke-linecap: round;
-  stroke: rgb(223, 98, 71);
-}
-
-svg circle {
-  stroke: white;
-  fill: black;
-}
-
-.darkMode circle {
-  stroke: var(--dark-bg);
-  fill: white;
 }
 
 .guess-input {
@@ -267,7 +233,8 @@ dialog {
   padding: 0 0.5rem;
 }
 
-.dialog-content p, .dialog-content h2 {
+.dialog-content p,
+.dialog-content h2 {
   margin: 0;
   margin-bottom: 0.5rem;
   /* color: var(--text-color); */

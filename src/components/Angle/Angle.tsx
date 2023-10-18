@@ -1,4 +1,6 @@
 import { FC } from "react";
+import styles from "./Angle.module.scss";
+import { useTheme } from "../../context/ThemeContext";
 
 const RADIUS = 48;
 const ARC_RADIUS = 12;
@@ -39,6 +41,7 @@ interface AngleProps {
 
 const Angle: FC<AngleProps> = ({ angle, rotation }) => {
   const radians = (angle * Math.PI) / 180;
+  const { darkMode } = useTheme();
 
   const line1 = {
     x1: 0,
@@ -60,12 +63,25 @@ const Angle: FC<AngleProps> = ({ angle, rotation }) => {
       width="48.682"
       height="48.463"
       xmlns="http://www.w3.org/2000/svg"
+      className={styles.svg}
     >
       <g style={{ rotate: rotation + "deg" }}>
-        <path className="arc" d={describeArc(radians, ARC_RADIUS, angle)} />
+        <path
+          className={styles.arc}
+          d={describeArc(radians, ARC_RADIUS, angle)}
+        />
         <line x1={line1.x1} y1={line1.y1} x2={line1.x2} y2={line1.y2} />
         <line x1={line2.x1} y1={line2.y1} x2={line2.x2} y2={line2.y2} />
-        <circle cx="0" cy="0" r="2" />
+        <circle
+          style={{
+            fill: darkMode ? "white" : "black",
+            stroke: darkMode ? "black" : "white",
+          }}
+          className={styles.circle}
+          cx="0"
+          cy="0"
+          r="2"
+        />
       </g>
     </svg>
   );

@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from "react";
-import "./index.css";
-import Angle from "./components/Angle";
-import Guesses from "./components/Guesses";
-import useTheme from "./hooks/useTheme";
+import "./index.scss";
+import Angle from "./components/Angle/Angle";
+import Guesses from "./components/Guesses/Guesses";
+import { useTheme } from "./context/ThemeContext";
 
 const GAME_LENGTH = 5;
 
@@ -20,7 +20,7 @@ export default function App() {
   const restartButton = useRef<HTMLButtonElement>(null);
   const guessInput = useRef<HTMLInputElement>(null);
   const helpMenu = useRef<HTMLDialogElement>(null);
-  const { darkMode, setDarkMode } = useTheme();
+  const { darkMode, toggleTheme } = useTheme();
 
   const addGuess = (guess: string) => {
     if (!guess) return;
@@ -75,7 +75,7 @@ export default function App() {
               ❓
             </span>
           </button>
-          <button onClick={() => setDarkMode((prev) => !prev)}>
+          <button onClick={() => toggleTheme()}>
             {darkMode ? "Light" : "Dark"} Theme&nbsp;
             {darkMode ? "☀️" : "🌙"}
           </button>
