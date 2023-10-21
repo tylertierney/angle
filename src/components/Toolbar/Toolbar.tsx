@@ -11,27 +11,29 @@ export default function Toolbar({ helpMenuRef, restartGame }: ToolbarProps) {
   const { darkMode, toggleTheme } = useTheme();
 
   return (
-    <div style={{ display: "flex", gap: "0.4rem" }}>
+    <div
+      className={styles.toolbar}
+      style={{
+        color: darkMode ? "white" : "var(--text-color)",
+      }}
+    >
       <button
         className={styles.button}
         onClick={() => helpMenuRef?.current?.show()}
         style={{
-          borderColor: darkMode ? "white" : "inherit",
           opacity: darkMode ? 0.8 : 1,
         }}
       >
-        <span role="img" aria-label="help">
-          ❓
-        </span>
+        <span className="material-symbols-outlined">question_mark</span>
       </button>
       <button className={styles.button} onClick={() => toggleTheme()}>
-        {darkMode ? "Light" : "Dark"} Theme&nbsp;
-        {darkMode ? "☀️" : "🌙"}
+        <span>{darkMode ? "Light" : "Dark"} Theme&nbsp;</span>
+        <span className="material-symbols-outlined">
+          {darkMode ? "light_mode" : "dark_mode"}
+        </span>
       </button>
       <button className={styles.button} onClick={() => restartGame()}>
-        <span role="img" aria-label="refresh">
-          🔄
-        </span>
+        <span className="material-symbols-outlined">refresh</span>
       </button>
     </div>
   );

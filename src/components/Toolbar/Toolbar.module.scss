@@ -1,3 +1,8 @@
+.toolbar {
+  display: flex;
+  gap: 0.2rem;
+}
+
 .button {
   border-radius: 0.4rem;
   padding: 0.4rem;
@@ -5,4 +10,13 @@
   border: 2px solid var(--gray);
   color: inherit;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+}
+
+.button:first-of-type,
+.button:last-of-type {
+  padding-left: 0.3rem;
+  padding-right: 0.3rem;
 }

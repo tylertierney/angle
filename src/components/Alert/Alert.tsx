@@ -32,7 +32,6 @@ export default function Alert({
       <button
         onClick={() => setShowGameOverAlert(false)}
         className="close-button"
-        // className={`close-button`}
         style={{ alignSelf: "flex-end" }}
       >
         <span className="material-symbols-outlined">close</span>
