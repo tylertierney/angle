@@ -2,7 +2,9 @@ import { useEffect, useRef, useState } from "react";
 import "./index.scss";
 import Angle from "./components/Angle/Angle";
 import Guesses from "./components/Guesses/Guesses";
-import { useTheme } from "./context/ThemeContext";
+import HelpMenu from "./components/HelpMenu/HelpMenu";
+import Toolbar from "./components/Toolbar/Toolbar";
+import Alert from "./components/Alert/Alert";
 
 const GAME_LENGTH = 5;
 
@@ -19,8 +21,7 @@ export default function App() {
   const [showGameOverAlert, setShowGameOverAlert] = useState(false);
   const restartButton = useRef<HTMLButtonElement>(null);
   const guessInput = useRef<HTMLInputElement>(null);
-  const helpMenu = useRef<HTMLDialogElement>(null);
-  const { darkMode, toggleTheme } = useTheme();
+  const helpMenuRef = useRef<HTMLDialogElement>(null);
 
   const addGuess = (guess: string) => {
     if (!guess) return;
@@ -69,22 +70,7 @@ export default function App() {
     <>
       <nav>
         <h1>Angle</h1>
-        <div style={{ display: "flex", gap: "0.4rem" }}>
-          <button onClick={() => helpMenu?.current?.show()}>
-            <span role="img" aria-label="help">
-              ❓
-            </span>
-          </button>
-          <button onClick={() => toggleTheme()}>
-            {darkMode ? "Light" : "Dark"} Theme&nbsp;
-            {darkMode ? "☀️" : "🌙"}
-          </button>
-          <button onClick={() => restartGame()}>
-            <span role="img" aria-label="refresh">
-              🔄
-            </span>
-          </button>
-        </div>
+        <Toolbar helpMenuRef={helpMenuRef} restartGame={restartGame} />
       </nav>
       <Angle angle={angle} rotation={rotation} />
       <form
@@ -112,62 +98,15 @@ export default function App() {
         Attempts: {guesses.length}/{GAME_LENGTH}
       </p>
       <Guesses guesses={guesses} angle={angle} />
-      <div
-        style={{ display: showGameOverAlert ? "flex" : "none" }}
-        className="alert"
-      >
-        <button
-          onClick={() => setShowGameOverAlert(false)}
-          className="close-button"
-          style={{ alignSelf: "flex-end" }}
-        >
-          <span className="material-symbols-outlined">close</span>
-        </button>
-        <span className="game-over-message">
-          {correct && "🎉🎉"}
-          {!correct && "🤔🤔"}
-          &nbsp; &nbsp;
-          {angle}&deg; &nbsp; &nbsp;
-          {!correct && "🤔🤔"}
-          {correct && "🎉🎉"}
-        </span>
-        <button
-          ref={restartButton}
-          onClick={() => restartGame()}
-          className="restart"
-        >
-          Restart?
-        </button>
-      </div>
-      <dialog ref={helpMenu}>
-        <div className="dialog-content">
-          <button
-            className="close-button"
-            onClick={() => helpMenu?.current?.close()}
-          >
-            <span className="material-symbols-outlined">close</span>
-          </button>
-          <h2>How to play!</h2>
-          <p>Guess the Angle in 5 guesses or less!</p>
-          <p>
-            Each time you make a guess it will tell you how close you are and
-            which direction to go.
-          </p>
-          <h2>Example:</h2>
-          <div className="example">
-            <Angle angle={164} rotation={0} />
-            <Guesses angle={164} guesses={[50, 120, 144, 168]} />
-          </div>
-          <p>
-            The hint tells you how warm your guess was and the arrow tells you
-            to guess higher or lower.
-          </p>
-          <p>The answer in this case was:</p>
-          <div className="example">
-            <Guesses angle={164} guesses={[164]} />
-          </div>
-        </div>
-      </dialog>
+      <Alert
+        showGameOverAlert={showGameOverAlert}
+        setShowGameOverAlert={setShowGameOverAlert}
+        correct={correct}
+        angle={angle}
+        restartButton={restartButton}
+        restartGame={restartGame}
+      />
+      <HelpMenu helpMenuRef={helpMenuRef} />
     </>
   );
 }
