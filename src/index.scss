@@ -73,13 +73,18 @@ nav h1 {
   color: var(--text-color);
 }
 
-.guess-input button:hover {
+.guess-input button:hover:not(:disabled) {
   background-color: var(--green);
 }
 
-.guess-input button:active {
+.guess-input button:active:not(:disabled) {
   background-color: color-mix(in srgb, var(--green) 93%, black);
   translate: 1px 1px;
+}
+
+.guess-input button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
 }
 
 .attempts {

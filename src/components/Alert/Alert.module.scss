@@ -19,6 +19,9 @@
 }
 
 .restartBtn {
+  color: var(--text-color);
+  font-weight: bold;
+  font-size: 1rem;
   border: none;
   padding: 0.8rem;
   cursor: pointer;
